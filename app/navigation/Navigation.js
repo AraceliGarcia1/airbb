@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-elements";
-import Travel from "../screens/Travel";
+import TravelStack from "./TravelStack";
 import Favorites from "../screens/Favorites";
 import Search from "../screens/Search";
 import Message from "../screens/Message";
@@ -14,8 +14,9 @@ export default function Navigation() {
     return (
 
         <NavigationContainer>
-            <Tab.Navigator initialRouteName="travel"
-            screenOptions={({route})=>({
+            <Tab.Navigator 
+               initialRouteName="travel"
+               screenOptions={({route})=>({
                tabBarIcon:({color})=>screenOptions(route,color),
                tabBarActiveTintColor:'tomato',
                tabBarInactiveTintColor:'gray',
@@ -33,7 +34,7 @@ export default function Navigation() {
                 />
                 <Tab.Screen
                     name="travel"
-                    component={Travel}
+                    component={TravelStack}
                     options={{ title: "Viajes" }}
                 />
                  <Tab.Screen
