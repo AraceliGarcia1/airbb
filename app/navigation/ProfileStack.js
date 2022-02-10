@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Profile from "../screens/Profile";
 import UserGuest from "../screens/profile/UserGuest";
 import UserLogged from "../screens/profile/UserLogged";
+import UserLogin from "../screens/profile/UserLogin";
 const Stack= createStackNavigator();
 
 
@@ -32,6 +33,11 @@ export default function ProfileStack(){
               name="userLogged"
               component={UserLogged}
               options={{title:"Perfil de Usuario"}}
+            />
+             <Stack.Screen
+              name="userLogin"
+              component={UserLogin}
+              options={{title:"Iniciar Sesion"}}
             
             />
         </Stack.Navigator>

@@ -3,9 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
 import TravelStack from './TravelStack';
-import Favorites from '../screens/Favorites';
-import Search from "../screens/Search"
-import Message from "../screens/Message"
+import FavoritesStack from './FavoritesStack';
+import SearchStack from './SearchStack';
+import MessageStack from './MessageStack';
 import ProfileStack from './ProfileStack';
 const Tab = createBottomTabNavigator();
 export default function Navigation() {
@@ -22,12 +22,12 @@ export default function Navigation() {
             >
                 <Tab.Screen
                     name='search'
-                    component={Search}
+                    component={SearchStack}
                     options={{ title: "Buscar" }}
                 />
                 <Tab.Screen
                     name='favorites'
-                    component={Favorites}
+                    component={FavoritesStack}
                     options={{ title: "Favoritos" }}
                 />
                 <Tab.Screen
@@ -37,7 +37,7 @@ export default function Navigation() {
                 />
                 <Tab.Screen
                     name='message'
-                    component={Message}
+                    component={MessageStack}
                     options={{ title: "Mensajes" }}
                 />
 

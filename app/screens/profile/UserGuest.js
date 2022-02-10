@@ -34,6 +34,8 @@ export default function UserGuest(props){
                    }}
                    //dando estilos desesctructurando
                    iconContainerStyle={{marginRight:10}}
+
+                   onPress={()=>navigation.navigate("userLogin")}
                   />
               </View>
 
