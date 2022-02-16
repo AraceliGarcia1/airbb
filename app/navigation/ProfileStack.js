@@ -11,6 +11,7 @@ const Stack= createStackNavigator();
 export default function ProfileStack(){
     return(
         <Stack.Navigator
+        
         screenOptions={{
             headerMode: 'screen',
             headerTintColor: 'white',
@@ -29,11 +30,13 @@ export default function ProfileStack(){
               options={{title:"Invitado"}}
             
             />
+            
              <Stack.Screen
               name="userLogged"
               component={UserLogged}
               options={{title:"Perfil de Usuario"}}
             />
+
              <Stack.Screen
               name="userLogin"
               component={UserLogin}
