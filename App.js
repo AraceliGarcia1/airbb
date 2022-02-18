@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Navigation from './app/navigation/navigation';
+import Navigation from './app/navigation/Navigation';
 import {app} from "./app/utils/firebase"
 export default function App() {
   return (

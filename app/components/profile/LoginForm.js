@@ -4,11 +4,13 @@ import { Input, Button, Icon } from "react-native-elements";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { isEmpty } from "lodash";
 import { NavigationRouteContext } from "@react-navigation/native";
+import Loading from "../Loading";
 //import
 
 export default function LoginForm(props) {
   //desestructurar props
-  const {navigation}=props;
+  const { navigation } = props;
+  const [loading, setLoading] = useState(false);
   //posicion 0 get, 1 set
 
   const [showPassword, setShowPassword] = useState(true);
@@ -27,19 +29,17 @@ export default function LoginForm(props) {
         password: "Campo obligatorio",
       });
     } else {
-      //Inicio de sesión
+      setLoading(true);
+
       const auth = getAuth();
       signInWithEmailAndPassword(auth, formData.email, formData.password)
-        //me regresa una respuesta y por eso ocuapamos el  .then que ejecuta mi promesa
         .then((userCredential) => {
-          // Signed in
-          //const user = userCredential.user;
-          //console.log(user);
-          // ...
+          setLoading(false);
 
-          navigation.navigate("profileStack")
+          navigation.navigate("profileStack");
         })
-        .catch((error) => { //implementar los codigos de errores 
+        .catch((error) => {
+          setLoading(false);
           console.log("Usuario y contraseñas incorrectas", error);
         });
       setError({
@@ -48,8 +48,6 @@ export default function LoginForm(props) {
       });
     }
   };
-
-
 
   return (
     <View style={styles.container}>
@@ -67,7 +65,6 @@ export default function LoginForm(props) {
         label="Correo Electronico"
         containerStyle={styles.containerInput}
         labelStyle={styles.labelInput}
-        // onChange={(event)=>console.log(event)}
         onChange={(event) => change(event, "email")}
         errorMessage={error.email}
       />
@@ -89,7 +86,6 @@ export default function LoginForm(props) {
         onChange={(event) => change(event, "password")}
         errorMessage={error.password}
       />
-
       <Button
         title="Iniciar Sesion"
         containerStyle={styles.btnContainer}
@@ -100,15 +96,18 @@ export default function LoginForm(props) {
         iconContainerStyle={{ marginRight: 10 }}
         onPress={login}
       />
-      <Text style={styles.textCreateAccount}>
+      <Text style={styles.textCreateAccount}  onPress={() => navigation.navigate("userCreate")}>
         <Icon
           type="material-community"
           name="account-plus"
           size={20}
           color="#1E84B6"
+         
         />
         Crear Cuenta
       </Text>
+
+      <Loading isVisible={loading} text="cargando..." />
     </View>
   );
 }

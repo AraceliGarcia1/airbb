@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import UserGuest from "./profile/UserGuest";
 import UserLogged from "./profile/UserLogged";
+import Loading from "../components/Loading";
 
 export default function Profile(props) {
   const { navigation } = props;
@@ -19,9 +20,14 @@ export default function Profile(props) {
 
   //true user Logged: false UserGuest
 
+
+  if(login===null)return <Loading isVisible={true} text="Cargando..."/>
   return login ? <UserLogged /> : <UserGuest navigation={navigation} />;
 
   //useefect,usefocuesefect
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+
+
+});
