@@ -5,11 +5,12 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { isEmpty } from "lodash";
 import { NavigationRouteContext } from "@react-navigation/native";
 import Loading from "../Loading";
-//import
+
 
 export default function LoginForm(props) {
   //desestructurar props
-  const { navigation } = props;
+  const { navigation,toastRef } = props;
+  console.log(toastRef);
   const [loading, setLoading] = useState(false);
   //posicion 0 get, 1 set
 
@@ -40,7 +41,7 @@ export default function LoginForm(props) {
         })
         .catch((error) => {
           setLoading(false);
-          console.log("Usuario y contraseñas incorrectas", error);
+          toastRef.current.show("Usuario o contraseña incorrectas");
         });
       setError({
         email: "",

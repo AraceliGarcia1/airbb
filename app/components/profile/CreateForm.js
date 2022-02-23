@@ -11,7 +11,7 @@ import {
 import Loading from "../Loading";
 
 export default function CreateForm(props) {
-  const { navigation } = props;
+  const { navigation,toastRef } = props;
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const [formData, setFormData] = useState({
@@ -57,7 +57,7 @@ export default function CreateForm(props) {
           })
           .catch((error) => {
             setLoading(false);
-            console.log("No se pudo crear", error);
+            toastRef.current.show("Esta cuenta se encuentra registrada");
           });
       } else {
         setError({

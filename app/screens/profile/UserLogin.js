@@ -1,13 +1,15 @@
 
-import React,{useState} from 'react'
+import React,{useState,useRef} from 'react'
 import { Text, View, ScrollView, StyleSheet } from 'react-native'
 import {Image} from "react-native-elements"
 import LoginForm from '../../components/profile/LoginForm'
 import { useNavigation } from '@react-navigation/native'
+import Toast from "react-native-easy-toast"
 
 
 export default function UserLogin() {
   const navigation=useNavigation()
+  const toastRef=useRef()
   
   return (
     <View style={styles.container}>
@@ -19,9 +21,14 @@ export default function UserLogin() {
          style={styles.img}
         
         />
-        <LoginForm navigation={navigation}/>
+        <LoginForm navigation={navigation} toastRef={toastRef}/>
         
       </ScrollView>
+      <Toast
+      ref={toastRef} opacity={0,9}
+      position="center"
+      
+      />
     </View>
   )
 }

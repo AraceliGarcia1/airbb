@@ -2,47 +2,56 @@ import React, {useEffect,useState}from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { getAuth } from "firebase/auth";
 import { Button } from "react-native-elements/dist/buttons/Button";
+import UserInfo from "../../components/profile/UserInfo";
 
 export default function UserLogged() {
-    const [reaload,setReaload]=useState()
-    const[infoUser,setInfoUser]=useState()
+    const [reaload,setReaload]=useState(false)
+    const[infoUser,setInfoUser]=useState(null)
+    const auth=getAuth()
+
     useEffect(()=>{
         (async ()=>{
-            const user= auth.currentUser
+            const user= await auth.currentUser
             setInfoUser(user)
-
-        })
+        })()
         setReaload(false)
 
     },[reaload])
 
-
-  const auth = getAuth();
   return (
     <View style={styles.container}>
+       {infoUser && <UserInfo infoUser={infoUser}/>}
       <Button 
       title="Cerrar sesión"
       buttonStyle={styles.btn}
-      containerStyle={styles.btnContainer}
+      titleStyle={styles.btnTitle}
+  
       onPress={()=>auth.signOut()}
       />
+     
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
+   minHeight:"100%",
+   backgroundColor:"#FFF",
+
   },
-  btnContainer: {
-    width: "80%",
+  btnTitle: {
+   color:"#ff5a60",
   },
   btn: {
-    backgroundColor:"#ff5a60",
-    color: "#fff",
+    marginTop:30,
+    borderRadius:0,
+    backgroundColor:"#FFF",
+    borderTopWidth:1,
+    borderTopColor:"#ff5a60",
+    borderBottomWidth:1,
+    borderBottomColor:"#ff5a60",
+    paddingTop:10,
+    paddingBottom:10,
   },
 });
 //alignten horizontal
