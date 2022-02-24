@@ -1,0 +1,4 @@
+UserLoading hace el toast y lo recibe Login Form
+
+https://reactnativeelements.com/docs/avatar
+https://docs.expo.dev/versions/latest/sdk/imagepicker/

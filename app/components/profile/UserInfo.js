@@ -16,11 +16,35 @@ export default function UserInfo(props) {
      >
           <Avatar.Accessory size={22} onPress={()=>console.log("hola")}/>
      </Avatar>
+     <View>
+     <Text style={styles.displayName}>
+       {displayName ? displayName:"Anónimo"}
+     </Text>
+     <Text>
+     {email ? email:"Red social"}
+     </Text>
+     </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+
+  container:{
+    alignItems:"center",
+    justifyContent:"center",
+    flexDirection:"row",
+    backgroundColor:"#fff",
+    paddingTop:30,
+    paddingBottom:30,
+  },
+  avatarContainer:{
+    marginRight:20,
+  },
+  displayName:{
+    fontWeight:"bold",
+    paddingBottom:5,
+  }
 
 
 })
