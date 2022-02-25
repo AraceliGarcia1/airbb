@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff5a60",
   },
   textCreateAccount: {
-    color: "##ff5a60",
+    color: "#ff5a60",
     marginTop: 16,
   },
 });
