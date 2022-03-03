@@ -1,6 +1,7 @@
 import React from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import Travel from "../screens/Travel";
+import AddHouse from "../components/travel/AddHouse";
 const Stack = createStackNavigator();
 
 export default function TravelStack() {
@@ -17,6 +18,12 @@ export default function TravelStack() {
                 component={ Travel }
                 options={{ title: "Viajes" }}
             />
+            <Stack.Screen
+                name="addHouse"
+                component={ AddHouse }
+                options={{ title: "Agrega un condominio" }}
+            />
+
         </Stack.Navigator>
     )
 }

@@ -2,3 +2,6 @@ https://firebase.google.com/docs/auth/web/manage-users?hl=es-419
 yarn add expo-permissions
 npm start --reset-cache  //elimimnar cache
 expo install expo-image-picker
+
+https://firebase.google.com/docs/storage/web/download-files
+https://console.firebase.google.com/project/airbnb-1240a/storage/airbnb-1240a.appspot.com/files/~2FAvatar

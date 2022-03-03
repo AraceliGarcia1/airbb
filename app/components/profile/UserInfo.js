@@ -9,7 +9,7 @@ import {
   ref,
   uploadBytes,
   getDownoloadURL
-} from "firebase/storage";
+} from "firebase/storage"
 import { update } from "lodash";
 import Loading from "../Loading";
 
