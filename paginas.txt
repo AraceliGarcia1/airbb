@@ -5,3 +5,9 @@ expo install expo-image-picker
 
 https://firebase.google.com/docs/storage/web/download-files
 https://console.firebase.google.com/project/airbnb-1240a/storage/airbnb-1240a.appspot.com/files/~2FAvatar
+
+https://docs.expo.dev/versions/latest/sdk/map-view/
+https://docs.expo.dev/versions/latest/sdk/location/
+https://yarnpkg.com/package/uuid
+https://console.firebase.google.com/project/airbnb-1240a/firestore/data/~2F?hl=es
+https://firebase.google.com/docs/firestore/quickstart#web-version-9

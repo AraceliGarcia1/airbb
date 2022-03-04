@@ -16,15 +16,16 @@ export default function Travel(props) {
   )
 
   return (
-    <View style={styles.Container}>
+    <View style={styles.container}>
+      <Text>Hola</Text>
       {user &&(
         <Icon
         reverse
-        type='material-community'
+        type="material-community"
         size={22}
         color="#ff0560"
         containerStyle={styles.iconContainer}
-        name='plus'
+        name="plus"
         onPress={()=>navigation.navigate("addHouse")}
         
         />
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor:"#fff"
   },
   iconContainer:{
-    position:'absolute',
+    position:"absolute",
     bottom:10,
     right:10,
     shadowOffset:{width:2,height:2},
