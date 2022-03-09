@@ -11,3 +11,10 @@ https://docs.expo.dev/versions/latest/sdk/location/
 https://yarnpkg.com/package/uuid
 https://console.firebase.google.com/project/airbnb-1240a/firestore/data/~2F?hl=es
 https://firebase.google.com/docs/firestore/quickstart#web-version-9
+
+
+const removeImage=()=>{
+Alert.alert(
+)
+          
+     }
