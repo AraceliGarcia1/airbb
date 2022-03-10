@@ -2,7 +2,7 @@ import { StyleSheet, Text, View,Alert, Dimensions, ScrollView } from 'react-nati
 import React,{useState,useEffect} from 'react'
 import {Input, Button,Divider, Icon,Avatar, Image} from "react-native-elements"
 import *as ImagePicker from "expo-image-picker"
-import {map, size,filter} from "lodash"
+import {map, size,filter, isEmpty} from "lodash"
 import * as Location from "expo-location"
 import MapView from "react-native-maps"
 import Modal from '../../utils/Modal'
@@ -21,8 +21,31 @@ export default function AddHouseForm(props) {
      const [address,setAddress]=useState("")
      const [description,setDescription]=useState("")
      const [locationHouse,setLocationHouse]=useState(null)
+
+
+
      const saveHouse=()=>{
           console.log("hola")
+          if(isEmpty(setImageSelected)||isEmpty(setPlace)||isEmpty(setAddress)||isEmpty(setLocationHouse)){
+               setError({
+               
+                    place: "Obligatorio",
+                    address: "Obligatorio",
+                    description:"Obligatorio"
+                  });
+          }else{
+               
+              setError({
+               
+              place: "",
+              address: "",
+              description: "",
+
+          });
+          console.log(llenos)
+
+          }
+
      }
 
     
@@ -95,7 +118,6 @@ function ImagePreview(props){
 
 }
 
-//actualiza las imagenes
 function UploadImage(props){
      const{toastRef,setImageSelected,imageSelected,error}=props
      const addImage=async()=>{
@@ -173,14 +195,14 @@ function Map(props){
  const[location,setLocation]=useState()
  useEffect(()=>{
       (async()=>{
-           const resultPermissions=await Location.requestForegroundPermissionsAsync
+           const resultPermissions= await Location.requestForegroundPermissionsAsync()
            if(resultPermissions.status==="granted"){
                 let loc=await Location.getCurrentPositionAsync({})
                 setLocation({
                      latitude:loc.coords.latitude,
                      longitude:loc.coords.longitude,
-                     latitudDelta:0.001, //estatico
-                     longitudeDelta:0.001 //estatico
+                     latitudeDelta:0.001, 
+                     longitudeDelta:0.001 
 
                 })
 
@@ -199,13 +221,11 @@ function Map(props){
  return(
       <Modal isVisible={isVisibleMap} setIsVisible={setIsVisibleMap}>
            <View>
-                //validamos si location tiene un dato
                 {location &&(
                      <MapView
                      style={styles.map}
                      initialRegion={location}
                      showsUserLocation={true}
-                     //setea la region actual, cada que mueva el mapa 
                      onRegionChange={(region)=>setLocation}
                      >
                           <MapView.Marker
@@ -242,6 +262,8 @@ function Map(props){
       </Modal>
  )
 }
+
+
 
 function FormAdd(props){
      const{setIsVisibleMap,setPlace,setDescription,setAddress,error,locationHouse}=props
