@@ -1,11 +1,7 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import React,{useRef} from 'react'  //use Ref es un referencia para el Toast 
 import { Image } from 'react-native-elements'
-import CreateForm from '../../components/profile/CreateForm'
-import { useNavigation } from '@react-navigation/native'
 import Toast from 'react-native-easy-toast'
-
-
 
 export default function UserCreate() {
   const toastRef=useRef() 
@@ -24,7 +20,7 @@ export default function UserCreate() {
       </ScrollView>
       <Toast            
       ref={toastRef}          //estilos del toast para el create form
-      opacity={0,9}
+      opacity={0.9}
       position="center"
       />
 
