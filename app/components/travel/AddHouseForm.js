@@ -5,13 +5,21 @@ import * as ImagePicker from "expo-image-picker";
 import { map, size, filter } from "lodash";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
+import {Collection, addDoc, collection } from "firebase/firestore"
+import{getStorage, ref, uploadBytes,getDownloadURL} from "firebase/storage"
+import {db} from "../../utils/firebase"
+import {getAuth} from "firebase/auth"
 import { isEmpty } from "lodash"
 import Modal from "../../utils/Modal"
+import uuid from "random-uuid-v4"
+import {useNavigation} from "@react-navigation/native"
+import { async } from "@firebase/util";
 
 const widthScreen = Dimensions.get("window").width;
 
 export default function AddHouseForm(props) {
     const { toastRef, setLoading } = props;
+    const navigation=useNavigation()
     const [imageSelected, setImageSelected] = useState([]);
     const [error, setError] = useState({
         camera: "",
@@ -42,8 +50,67 @@ export default function AddHouseForm(props) {
                 address: "",
                 description: ""
             })
+            setLoading(true)
+            saveImage().then(async(response)=>{
+                try{
+                    const auth=getAuth()
+                    //si exste la usa, sino la genera 
+                    const docRef=await addDoc(collection(db,"houses"),{
+                        //si es el mismo key, lo acepta 
+                        id:uuid(),
+                        place:place,
+                        description:description,
+                        address:address,
+                        location:locationHouse,
+                        images:response,
+                        rating:0,
+                        ratingTotal:0,
+                        quantityVoting:0,
+                        createAt:new Date(),
+                        //mandamos el usuario del que tiene sesion actualmente 
+                        createBy:auth.currentUser.uid
+
+                    })
+                    setLoading(false)
+                    navigation.navigate("travelStack"),{id:1,name:"erick"}
+
+                }catch(err){
+                    console.log(err)
+
+                }
+
+            }).catch((err)=>{
+                console.log("error al obtener",err)
+
+            })
         }
     }
+    // guardar en el storage
+    const saveImage = async()=>{
+        const imageBlob=[]
+        await Promise.all(
+            //POR CADA ITERACION DENTRO DEL HASMAP USAMOS UN IMAGE 
+            map(imageSelected,async(image)=>{
+                const response=await fetch(image)
+                const {_bodyBlob}=response
+                const storage=getStorage()
+                const id= uuid()
+                const storageRef=ref(storage,`house/ ${id}`)
+                await uploadBytes(storageRef,_bodyBlob)
+                .then(async()=>{
+                    await getDownloadURL(ref(storage,`house/ ${id}`))
+                    .then((url)=>{
+                        imageBlob.push(url) 
+                    }).catch((err)=>{
+                        console.log("error al descargar",err);
+                    }).catch((err)=>{
+                        console.log("error al registrar", err);
+                })
+            })
+            }))
+         return imageBlob
+    }
+        
     return (
         <ScrollView>
             <ImagePreview imageSelected={imageSelected} />
@@ -110,7 +177,7 @@ function UploadImage(props) {
     const addImage = async () => {
         const resultPermission = await ImagePicker.requestCameraPermissionsAsync();
         if (resultPermission.status !== "denied") {
-            const result = await ImagePicker.launchCameraAsync({
+            const result = await ImagePicker.launchImageLibraryAsync({
                 allowsEditing: true,
                 aspect: [3, 2],
             });
@@ -186,7 +253,7 @@ function FormAdd(props) {
             <Input
                 label="Dirección"
                 labelStyle={styles.label}
-                placeholder="Colonia Lomas del Carril"
+                placeholder="Colonia Laureles"
                 containerStyle={styles.inputContainer}
                 inputContainerStyle={styles.textArea}
                 errorMessage={error.address}

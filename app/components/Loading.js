@@ -15,7 +15,7 @@ return(
      
      >
           <View style={styles.container}>
-               <ActivityIndicator size="large" color="#ff0560" />
+               <ActivityIndicator size="large" color="#131c46" />
                {text && <Text style={styles.text}>{text}</Text>}
           </View>
 
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
           height:100,
           width:200,
           backgroundColor:"#fff",
-          borderColor:"#ff0560",
+          borderColor:"#131c46",
           borderWidth:2,
           borderRadius:10,
           justifyContent:"center",
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 
      },
      text:{
-          color:"#ff0560",
+          color:"#131c46",
           textTransform:"uppercase",
           marginTop:10,
           textAlign:"center"
