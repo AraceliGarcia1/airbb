@@ -27,26 +27,25 @@ return(
 }
 
 const styles = StyleSheet.create({
-     overlay:{
-          height:100,
-          width:200,
-          backgroundColor:"#fff",
-          borderColor:"#131c46",
-          borderWidth:2,
-          borderRadius:10,
-          justifyContent:"center",
-          alignItems:"center"
-     },
-     container:{
-          flex:1,
-          alignItems:"center",
-          justifyContent:"center"
-
-     },
-     text:{
-          color:"#131c46",
-          textTransform:"uppercase",
-          marginTop:10,
-          textAlign:"center"
-     }
+     overlay: {
+          height: 100,
+          width: 200,
+          backgroundColor: "#FFF",
+          borderColor: "#FF0560",
+          borderWidth: 2,
+          borderRadius: 10,
+          justifyContent: "center",
+          alignItems: "center"
+      },
+      container: {
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center"
+      },
+      text: {
+          color: "#FF0560",
+          textTransform: "uppercase",
+          marginTop: 10,
+          textAlign: "center"
+      }
 })

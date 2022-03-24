@@ -15,10 +15,11 @@ import {
 } from "firebase/firestore";
 import { size } from "lodash";
 import { Loading } from "../components/Loading";
-import ListHouses from "./travel/ListHouses";
+import ListHousesFive from "./travel/ListHousesFive";
 
-export default function Travel(props) {
-  console.log("Mira -->", props)
+export default function TopFive(props) {
+  console.log("props =>", props)
+  
   const { navigation } = props;
   const [user, setUser] = useState();
   const [houses, setHouses] = useState([]);
@@ -33,16 +34,16 @@ export default function Travel(props) {
 
   useFocusEffect(
     useCallback(() => {
-      getHouses().then((response) => {
+        getTopFive().then((response) => {
         setHouses(response);
       });
     }, [])
   );
 
-  const getHouses = async () => {
+  const getTopFive = async () => {
     const result = [];
     const housesRef = collection(db, "houses");
-    const q = query(housesRef, orderBy("createAt", "desc"));
+    const q = query(housesRef, orderBy("rating", "desc"), limit (5));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       result.push(doc.data());
@@ -52,18 +53,7 @@ export default function Travel(props) {
 
   return (
     <View style={styles.container}>
-      <ListHouses houses = { houses } navigate = { navigation }/>
-      {user && (
-        <Icon
-          reverse
-          type="material-community"
-          size={22}
-          color="#FF0560"
-          containerStyle={styles.iconContainer}
-          name="plus"
-          onPress={() => navigation.navigate("addHouse")}
-        />
-      )}
+      <ListHousesFive houses={houses} />
     </View>
   );
 }
