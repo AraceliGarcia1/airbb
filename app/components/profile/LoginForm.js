@@ -15,8 +15,10 @@ export default function LoginForm(props) {
   //posicion 0 get, 1 set
 
   const [showPassword, setShowPassword] = useState(true);
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ email: "", 
+  password: "" });
+  const [error, setError] = useState({ email: "",
+   password: "" });
 
   const change = (event, type) => {
     setFormData({ ...formData, [type]: event.nativeEvent.text });

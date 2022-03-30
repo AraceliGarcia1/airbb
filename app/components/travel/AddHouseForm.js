@@ -54,9 +54,9 @@ export default function AddHouseForm(props) {
             saveImage().then(async(response)=>{
                 try{
                     const auth=getAuth()
-                    //si exste la usa, sino la genera 
+                    
                     const docRef=await addDoc(collection(db,"houses"),{
-                        //si es el mismo key, lo acepta 
+                        
                         id:uuid(),
                         place:place,
                         description:description,
@@ -67,7 +67,7 @@ export default function AddHouseForm(props) {
                         ratingTotal:0,
                         quantityVoting:0,
                         createAt:new Date(),
-                        //mandamos el usuario del que tiene sesion actualmente 
+                 
                         createBy:auth.currentUser.uid
 
                     })
@@ -265,7 +265,7 @@ function FormAdd(props) {
                         color={locationHouse ? "#00a680" : "#c2c2c2"}
                         onPress={() => setIsVisibleMap(true)}
                     />
-                    //un calor nulo en javaScript es falso
+                    
                 }
             />
             <Input
@@ -314,9 +314,9 @@ function Map(props) {
                 {location && (
                     <MapView
                         style={styles.map}
-                        initialRegion={location} //ubicación actual de mi usuario
+                        initialRegion={location} 
                         showsUserLocation={true}
-                        onRegionChange={(region) => setLocation(region)}//que va a hacer cuando la ubicación cambie
+                        onRegionChange={(region) => setLocation(region)}
                     >
                         <MapView.Marker
                             coordinate={{
